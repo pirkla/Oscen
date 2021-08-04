@@ -18,9 +18,12 @@ class ContentViewModel: ObservableObject{
     var variables = Dictionary<String,String>()
     
     
-    @Published var showSheet = false
+    @Published var showAlert = false
+    var errorDetails: ErrorDetails? = nil
     var errorDescription = ""
     
+    @Published var showSheet = false
+
     enum ActiveSheet {
         case errorView
         case successView
@@ -34,6 +37,8 @@ class ContentViewModel: ObservableObject{
             }
         }
     }
+    
+    var alertButton: Button<Text>? = nil
         
     init(questions: [QuestionModel]? = nil, appConfigController: AppConfigController? = nil) {
         self.questions = questions ?? Array()
@@ -76,9 +81,10 @@ class ContentViewModel: ObservableObject{
     
     func loadAppConfig(_ appConfigController: AppConfigController) {
         guard let appConfigModel = appConfigController.readAppConfig() else {
-            errorDescription = "No app configuration found. Contact your admin for help."
-            activeSheet = .errorView
-            showSheet = true
+            errorDetails = ErrorDetails(title: "Error", message: "No app configuration found. Contact your admin for help.", buttonMessage: "Retry") {
+                self.loadAppConfig(appConfigController)
+            }
+            showAlert = true
             return
         }
         questions = QuestionModel.fromDict(questionArray: appConfigModel.questionArray)
@@ -87,14 +93,20 @@ class ContentViewModel: ObservableObject{
         title = appConfigModel.title
         
         guard !webhook.isEmpty else {
-            errorDescription = "No webhook found. Contact your admin for help."
-            activeSheet = .errorView
+            // TODO:
+            errorDetails = ErrorDetails(title: "Error", message: "No app configuraiton found. Contact your admin for help.", buttonMessage: "Retry") {
+                self.loadAppConfig(appConfigController)
+            }
+            showAlert = true
             return
         }
         
         guard !questions.isEmpty else {
-            errorDescription = "No questions found. Contact your admin for help."
-            activeSheet = .errorView
+            //TODO:
+            errorDetails = ErrorDetails(title: "Error", message: "No app configuration found. Contact your admin for help.", buttonMessage: "Retry") {
+                self.loadAppConfig(appConfigController)
+            }
+            showAlert = true
             return
         }
     }

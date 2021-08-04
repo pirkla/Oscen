@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7119B08226BB16D300689460 /* ErrorDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7119B08126BB16D300689460 /* ErrorDetails.swift */; };
+		7119B08326BB16D300689460 /* ErrorDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7119B08126BB16D300689460 /* ErrorDetails.swift */; };
 		712074A426B6E7FA00E4C63B /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712074A326B6E7FA00E4C63B /* Tests_iOS.swift */; };
 		712074AF26B6E7FA00E4C63B /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712074AE26B6E7FA00E4C63B /* Tests_macOS.swift */; };
 		712074B126B6E7FA00E4C63B /* OscenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7120748826B6E7F800E4C63B /* OscenApp.swift */; };
@@ -57,6 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7119B08126BB16D300689460 /* ErrorDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDetails.swift; sourceTree = "<group>"; };
 		7120748826B6E7F800E4C63B /* OscenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OscenApp.swift; sourceTree = "<group>"; };
 		7120748926B6E7F800E4C63B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7120748A26B6E7FA00E4C63B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -223,6 +226,7 @@
 				712074D526B7125800E4C63B /* AppConfigModel.swift */,
 				7141A5CC26B79CC200FE1761 /* SurveySubmitModel.swift */,
 				7141A5DC26B81CAA00FE1761 /* QuestionModel.swift */,
+				7119B08126BB16D300689460 /* ErrorDetails.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -395,6 +399,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7141A5DD26B81CAA00FE1761 /* QuestionModel.swift in Sources */,
+				7119B08226BB16D300689460 /* ErrorDetails.swift in Sources */,
 				7141A5D126B79FBE00FE1761 /* URLSessionExtension.swift in Sources */,
 				712074B326B6E7FA00E4C63B /* ContentView.swift in Sources */,
 				7141A5DA26B81A4400FE1761 /* AppConfigController.swift in Sources */,
@@ -415,6 +420,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7141A5DE26B81CAA00FE1761 /* QuestionModel.swift in Sources */,
+				7119B08326BB16D300689460 /* ErrorDetails.swift in Sources */,
 				7141A5D226B79FBE00FE1761 /* URLSessionExtension.swift in Sources */,
 				712074B426B6E7FA00E4C63B /* ContentView.swift in Sources */,
 				7141A5DB26B81A4400FE1761 /* AppConfigController.swift in Sources */,

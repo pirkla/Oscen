@@ -39,6 +39,25 @@ struct ContentView: View {
         .sheet(isPresented: $contentViewModel.showSheet) {
             self.contentViewModel.currentModal()
         }
+        .alert(
+            "Woops", isPresented: $contentViewModel.showAlert, presenting: contentViewModel.errorDetails
+                ) { detail in
+                    Button(role: .destructive) {
+                        // Handle delete action.
+                    } label: {
+                        Text("""
+                        Delete \(detail.title)
+                        """)
+                    }
+                    Button("Retry") {
+                        // handle retry action.
+                    }
+                } message: { detail in
+                    Text(detail.error)
+                }
+//        .alert(isPresented: $contentViewModel.showAlert, content: {
+//            Alert(title: Text("Alert"), message: Text(contentViewModel.errorDescription), dismissButton: nil)
+//        })
         .frame(minWidth: 200, idealWidth: 550, maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.init("Background"))
     }
