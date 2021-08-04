@@ -10,7 +10,6 @@ import Foundation
 struct AppConfigModel {
     let webhookUrl: String
     let title: String
-    let udid: String?
-    let username: String?
+    let variableDict: Dictionary<String,String>
     let questionArray: Array<Dictionary<String,Any>>
 }

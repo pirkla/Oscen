@@ -25,10 +25,9 @@ class AppConfigController {
         if let managedConf = UserDefaults.standard.object(forKey: configKey) as? [String:Any?] {
             let webhookUrl = managedConf["webhook"] as? String ?? ""
             let title = managedConf["title"] as? String ?? ""
-            let udid = managedConf["udid"] as? String
-            let username = managedConf["username"] as? String
+            let variables = managedConf["variables"] as? Dictionary<String,String> ?? Dictionary()
             let questions = managedConf["questions"] as? Array<Dictionary<String,Any>> ?? Array()
-            return AppConfigModel(webhookUrl: webhookUrl,title:title, udid: udid, username: username, questionArray: questions)
+            return AppConfigModel(webhookUrl: webhookUrl,title:title, variableDict: variables, questionArray: questions)
         }
         return nil
     }
@@ -52,9 +51,9 @@ class AppConfigController {
         
         let defaults = UserDefaults.standard
         defaults.set("https://enzs9uvxhj7j1n2.m.pipedream.net", forKey: "webhook")
-        defaults.set("Question time hot dog", forKey: "title")
-        defaults.set("0001111122222", forKey: "udid")
-        defaults.set("big boi", forKey: "username")
+        defaults.set("Question time buddy", forKey: "title")
+//        defaults.set("0001111122222", forKey: "udid")
+//        defaults.set("big boi", forKey: "username")
         defaults.set([questionModel1.asDictionary(), questionModel2.asDictionary(), questionModel3.asDictionary()], forKey: "questions")
         defaults.set(["variable1":"someusername","variable2":"someudid","variable3":"something else"], forKey: "variables")
     }
@@ -65,11 +64,10 @@ class AppConfigController {
         guard let questions = defaults.object(forKey: "questions") as? Array<Dictionary<String,Any>> else {
             return nil
         }
+        let variables = defaults.object(forKey: "variables") as? Dictionary<String,String> ?? Dictionary()
         let webhook = defaults.object(forKey: "webhook") as? String ?? ""
-        let udid = defaults.object(forKey: "udid") as? String ?? ""
-        let username = defaults.object(forKey: "username") as? String ?? ""
         let title = defaults.object(forKey: "title") as? String ?? ""
-        return AppConfigModel(webhookUrl: webhook, title: title, udid: udid, username: username, questionArray: questions)
+        return AppConfigModel(webhookUrl: webhook, title: title, variableDict: variables, questionArray: questions)
 
     }
     

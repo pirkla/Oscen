@@ -15,8 +15,7 @@ class ContentViewModel: ObservableObject{
     @Published var questions: [QuestionModel] = Array()
     @Published var title = ""
     var webhook = ""
-    var username = ""
-    var udid = ""
+    var variables = Dictionary<String,String>()
     
     
     @Published var showSheet = false
@@ -62,7 +61,7 @@ class ContentViewModel: ObservableObject{
             showSheet = true
             return
         }
-        let surveySubmitModel = SurveySubmitModel(username: username, udid: udid, questionModels: questions)
+        let surveySubmitModel = SurveySubmitModel(variables: variables, questionModels: questions)
         surveySubmitModel.postSurvey(baseURL: URLComponents(string: webhook)!, session: URLSession.shared) {
             (result) in
             switch result {
@@ -84,8 +83,7 @@ class ContentViewModel: ObservableObject{
         }
         questions = QuestionModel.fromDict(questionArray: appConfigModel.questionArray)
         webhook = appConfigModel.webhookUrl
-        username = appConfigModel.username ?? ""
-        udid = appConfigModel.udid ?? ""
+        variables = appConfigModel.variableDict
         title = appConfigModel.title
         
         guard !webhook.isEmpty else {

@@ -117,6 +117,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7119B08026BB000D00689460 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7141A5D926B81A4400FE1761 /* AppConfigController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		7120748226B6E7F800E4C63B = {
 			isa = PBXGroup;
 			children = (
@@ -136,10 +144,10 @@
 				712074C526B70D3700E4C63B /* Views */,
 				712074CF26B70EAC00E4C63B /* ViewModel */,
 				712074D426B7123E00E4C63B /* Models */,
+				7119B08026BB000D00689460 /* Controllers */,
 				7141A5CF26B79FA300FE1761 /* Extensions */,
 				7120748826B6E7F800E4C63B /* OscenApp.swift */,
 				7120748A26B6E7FA00E4C63B /* Assets.xcassets */,
-				7141A5D926B81A4400FE1761 /* AppConfigController.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";

@@ -8,15 +8,13 @@
 import Foundation
 
 struct SurveySubmitModel: Codable {
-    let username: String
-    let udid: String
+    let variables: Dictionary<String,String>
     let answers: Dictionary<String,String>
 }
 
 extension SurveySubmitModel {
-    init(username: String, udid: String, questionModels: [QuestionModel]) {
-        self.username = username
-        self.udid = udid
+    init(variables: [String:String], questionModels: [QuestionModel]) {
+        self.variables = variables
         var answerDict: Dictionary<String,String> = Dictionary()
         questionModels.forEach { question in
             answerDict[question.questionId] = question.inputAnswer
