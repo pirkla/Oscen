@@ -11,7 +11,7 @@ import SwiftUI
 struct OscenApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(contentViewModel: ContentViewModel())
+            ContentView(contentViewModel: ContentViewModel(appConfigController: MockAppConfigController(), webhookController: WebhookController()))
         }
     }
 }

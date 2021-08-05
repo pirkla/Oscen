@@ -11,7 +11,7 @@ struct ContentView: View {
     @ObservedObject var contentViewModel: ContentViewModel
     @State var animate = false
     var body: some View {
-        VStack {
+        ScrollView {
             HStack {
                 Text(contentViewModel.title)
                     .padding()
@@ -36,41 +36,23 @@ struct ContentView: View {
             Spacer()
             #endif
         }
-        .sheet(isPresented: $contentViewModel.showSheet) {
-            self.contentViewModel.currentModal()
+        .alert(isPresented:$contentViewModel.showAlert) {
+            Alert(
+                title: Text(contentViewModel.errorDetails?.title ?? "Error"),
+                message: Text(contentViewModel.errorDetails?.message ?? "Unknown"),
+                dismissButton: .default(Text(contentViewModel.errorDetails?.buttonMessage ?? "Ok")) {
+                    contentViewModel.errorDetails?.buttonAction?()
+                }            )
         }
-        .alert(
-            "Woops", isPresented: $contentViewModel.showAlert, presenting: contentViewModel.errorDetails
-                ) { detail in
-                    Button(role: .destructive) {
-                        // Handle delete action.
-                    } label: {
-                        Text("""
-                        Delete \(detail.title)
-                        """)
-                    }
-                    Button("Retry") {
-                        // handle retry action.
-                    }
-                } message: { detail in
-                    Text(detail.error)
-                }
-//        .alert(isPresented: $contentViewModel.showAlert, content: {
-//            Alert(title: Text("Alert"), message: Text(contentViewModel.errorDescription), dismissButton: nil)
-//        })
         .frame(minWidth: 200, idealWidth: 550, maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.init("Background"))
+        //TODO: add refreshable modifier in iOS 15
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        let questionModel1 = QuestionModel(questionId: "1", questionType: QuestionModel.QuestionType.textInput, questionText: "How many times would you say?", questionAnswers: Array(),inputAnswer: "wackadoo")
-        let questionModel2 = QuestionModel(questionId: "1", questionType: QuestionModel.QuestionType.dropdown, questionText: "But how are you really?", questionAnswers: ["one","two","three"], inputAnswer: "one")
-        
-        let questionArray = [questionModel1, questionModel2, questionModel1, questionModel2,questionModel2]
-    
-        let contentViewModel = ContentViewModel(questions:questionArray)
+    static var previews: some View {    
+        let contentViewModel = ContentViewModel(appConfigController: MockAppConfigController())
         
         Group {
             ContentView(contentViewModel: contentViewModel).preferredColorScheme(.dark)

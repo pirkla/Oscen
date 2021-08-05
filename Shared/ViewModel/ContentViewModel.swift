@@ -11,42 +11,28 @@ import SwiftUI
 
 class ContentViewModel: ObservableObject{
     
-    let appConfigController: AppConfigController
+    let appConfigController: AppConfigControllerProto
+    let webhookController: WebhookControllerProto
     @Published var questions: [QuestionModel] = Array()
     @Published var title = ""
     var webhook = ""
     var variables = Dictionary<String,String>()
     
-    
     @Published var showAlert = false
     var errorDetails: ErrorDetails? = nil
-    var errorDescription = ""
-    
-    @Published var showSheet = false
 
-    enum ActiveSheet {
-        case errorView
-        case successView
-        case incompleteView
-    }
-    
-    var activeSheet: ActiveSheet = .errorView {
-        willSet {
-            DispatchQueue.main.async {
-                self.showSheet = true
-            }
+    func setAlert(shouldShow: Bool = true, _ details: ErrorDetails) {
+        DispatchQueue.main.async {
+            self.errorDetails = details
+            self.showAlert = shouldShow
         }
     }
     
-    var alertButton: Button<Text>? = nil
-        
-    init(questions: [QuestionModel]? = nil, appConfigController: AppConfigController? = nil) {
-        self.questions = questions ?? Array()
-        self.appConfigController = appConfigController ?? AppConfigController()
-        self.appConfigController.addHook {
-            self.loadAppConfig(self.appConfigController)
-        }
-        self.loadAppConfig(self.appConfigController)
+    init(appConfigController: AppConfigControllerProto = AppConfigController(),
+         webhookController: WebhookControllerProto = WebhookController()) {
+        self.appConfigController = appConfigController
+        self.webhookController = webhookController
+        self.loadAppConfig(appConfigController)
     }
     
     var canSubmit: Bool {
@@ -62,29 +48,29 @@ class ContentViewModel: ObservableObject{
     
     func publishWebhook() {
         if (!canSubmit) {
-            activeSheet = .incompleteView
-            showSheet = true
+            self.setAlert(ErrorDetails(title: "Error", message: "Please fill in all answers.", buttonMessage: "Ok", buttonAction: nil))
             return
         }
         let surveySubmitModel = SurveySubmitModel(variables: variables, questionModels: questions)
-        surveySubmitModel.postSurvey(baseURL: URLComponents(string: webhook)!, session: URLSession.shared) {
+        //TODO handle creating webhook url better
+        webhookController.postSurvey(surveySubmitModel: surveySubmitModel, baseURL: URLComponents(string: webhook)!, session: URLSession.shared) {
             (result) in
             switch result {
             case .success(_):
-                self.activeSheet = .successView
+                self.setAlert(ErrorDetails(title: "Success!", message: "Your answers have been submitted.", buttonMessage: "Do it again", buttonAction: nil))
             case .failure(let error):
-                self.errorDescription = error.localizedDescription + ". Contact your admin for help."
-                self.activeSheet = .errorView
+                self.setAlert(ErrorDetails(title: "Error", message: error.localizedDescription + ". Contact your admin for help.", buttonMessage: "Retry", buttonAction: nil))
             }
         }
     }
     
-    func loadAppConfig(_ appConfigController: AppConfigController) {
+    //TODO: clean this up
+    func loadAppConfig(_ appConfigController: AppConfigControllerProto) {
         guard let appConfigModel = appConfigController.readAppConfig() else {
-            errorDetails = ErrorDetails(title: "Error", message: "No app configuration found. Contact your admin for help.", buttonMessage: "Retry") {
+            let details = ErrorDetails(title: "Error", message: "No app configuration found. Contact your admin for help.", buttonMessage: "Retry") {
                 self.loadAppConfig(appConfigController)
             }
-            showAlert = true
+            setAlert(details)
             return
         }
         questions = QuestionModel.fromDict(questionArray: appConfigModel.questionArray)
@@ -94,35 +80,20 @@ class ContentViewModel: ObservableObject{
         
         guard !webhook.isEmpty else {
             // TODO:
-            errorDetails = ErrorDetails(title: "Error", message: "No app configuraiton found. Contact your admin for help.", buttonMessage: "Retry") {
+            let details = ErrorDetails(title: "Error", message: "No webhook found. Contact your admin for help.", buttonMessage: "Retry") {
                 self.loadAppConfig(appConfigController)
             }
-            showAlert = true
+            setAlert(details)
             return
         }
         
         guard !questions.isEmpty else {
             //TODO:
-            errorDetails = ErrorDetails(title: "Error", message: "No app configuration found. Contact your admin for help.", buttonMessage: "Retry") {
+            let details = ErrorDetails(title: "Error", message: "No question configurations found. Contact your admin for help.", buttonMessage: "Retry") {
                 self.loadAppConfig(appConfigController)
             }
-            showAlert = true
+            setAlert(details)
             return
         }
-    }
-    
-    func currentModal() -> AnyView {
-        switch activeSheet {
-        case .errorView:
-            return AnyView(InfoSheetView(title: "An error occurred", description: self.errorDescription, buttonTitle: "Retry", image: Image(systemName: "exclamationmark.octagon.fill")){
-                self.loadAppConfig(self.appConfigController)
-            })
-        case .successView:
-            return AnyView(InfoSheetView(title: "Success!", description: "Your answers have been submitted.", buttonTitle: "Do it again", image: nil, hook: nil))
-        case .incompleteView:
-            return AnyView(InfoSheetView(title: "Form is incomplete", description: "Complete all fields in the form before submitting.", buttonTitle: "Resume", image: nil, hook: nil))
-
-        }
-        
     }
 }
