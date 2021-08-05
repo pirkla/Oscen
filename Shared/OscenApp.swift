@@ -11,7 +11,12 @@ import SwiftUI
 struct OscenApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(contentViewModel: ContentViewModel(appConfigController: MockAppConfigController(), webhookController: WebhookController()))
+            #if DEBUG
+            ContentView(contentViewModel: ContentViewModel(appConfigController: MockAppConfigController(), webhookController: MockWebhookController()))
+            #else
+            ContentView(contentViewModel: ContentViewModel(appConfigController: AppConfigController(), webhookController: WebhookController()))
+            #endif
+
         }
     }
 }

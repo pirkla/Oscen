@@ -51,8 +51,8 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {    
-        let contentViewModel = ContentViewModel(appConfigController: MockAppConfigController())
+    static var previews: some View {
+        let contentViewModel = ContentViewModel(appConfigController: MockAppConfigController(), webhookController: MockWebhookController())
         
         Group {
             ContentView(contentViewModel: contentViewModel).preferredColorScheme(.dark)

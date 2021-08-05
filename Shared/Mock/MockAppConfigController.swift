@@ -20,7 +20,7 @@ class MockAppConfigController: AppConfigControllerProto {
         }
         let questionArray = [questionModel1.asDictionary(), questionModel2.asDictionary(), questionModel3.asDictionary()]
         let variables = ["username":"someuser","udid":"111111222222333334444","somevariable":"yeah we got this"]
-        return AppConfigModel(webhookUrl: "https://example.com", title: "Some questions for you guy", variableDict: variables, questionArray: questionArray)
+        return AppConfigModel(webhookUrl: "https://example.com", title: "Some questions for you friend", variableDict: variables, questionArray: questionArray)
     }
     
     func addHook(_ configChangedHook: @escaping () -> Void) {
