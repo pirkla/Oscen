@@ -47,8 +47,6 @@
 		7141A5DB26B81A4400FE1761 /* AppConfigController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7141A5D926B81A4400FE1761 /* AppConfigController.swift */; };
 		7141A5DD26B81CAA00FE1761 /* QuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7141A5DC26B81CAA00FE1761 /* QuestionModel.swift */; };
 		7141A5DE26B81CAA00FE1761 /* QuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7141A5DC26B81CAA00FE1761 /* QuestionModel.swift */; };
-		71499C6726B893CA003F02AA /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71499C6626B893CA003F02AA /* LogoView.swift */; };
-		71499C6826B893CA003F02AA /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71499C6626B893CA003F02AA /* LogoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,7 +97,6 @@
 		7141A5D626B7A00D00FE1761 /* URLRequestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestExtension.swift; sourceTree = "<group>"; };
 		7141A5D926B81A4400FE1761 /* AppConfigController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigController.swift; sourceTree = "<group>"; };
 		7141A5DC26B81CAA00FE1761 /* QuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionModel.swift; sourceTree = "<group>"; };
-		71499C6626B893CA003F02AA /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		71499C6C26B994C6003F02AA /* Oscen.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Oscen.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -243,7 +240,6 @@
 			children = (
 				7120748926B6E7F800E4C63B /* ContentView.swift */,
 				712074D826B71C6600E4C63B /* QuestionView.swift */,
-				71499C6626B893CA003F02AA /* LogoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -451,7 +447,6 @@
 				7103C29E26BB58440049B9C9 /* MockWebhookController.swift in Sources */,
 				7141A5D726B7A00D00FE1761 /* URLRequestExtension.swift in Sources */,
 				7103C29226BB417B0049B9C9 /* MockAppConfigController.swift in Sources */,
-				71499C6726B893CA003F02AA /* LogoView.swift in Sources */,
 				712074D126B70EBE00E4C63B /* ContentViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -477,7 +472,6 @@
 				7103C29F26BB58440049B9C9 /* MockWebhookController.swift in Sources */,
 				7141A5D826B7A00D00FE1761 /* URLRequestExtension.swift in Sources */,
 				7103C29326BB417B0049B9C9 /* MockAppConfigController.swift in Sources */,
-				71499C6826B893CA003F02AA /* LogoView.swift in Sources */,
 				712074D226B70EBE00E4C63B /* ContentViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

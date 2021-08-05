@@ -17,7 +17,6 @@ struct CustomPickerLabel : View {
             TextField("Select One", text: $boundAnswer)
                 .allowsHitTesting(false)
                 .multilineTextAlignment(.center)
-            
         }
     }
 }
