@@ -47,7 +47,6 @@ struct QuestionView: View {
                 VStack(alignment:.center){
                     TextField("Answer", text: $question.inputAnswer)
                         .frame(maxWidth: .infinity)
-                        
                 }
                 .padding(.horizontal, 12)
                 .padding(.vertical, 6)

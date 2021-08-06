@@ -11,14 +11,14 @@ class ConfigTests {
     func setTestDefaults() {
         let questionModel1 = QuestionModel(questionId: "1", questionType: QuestionModel.QuestionType.textInput, questionText: "How are you?", questionAnswers: Array(),inputAnswer: "wackadoo2")
         let questionModel2 = QuestionModel(questionId: "2", questionType: QuestionModel.QuestionType.dropdown, questionText: "Pick One", questionAnswers: ["one","two","three"], inputAnswer: "one2")
-        let questionModel3 = QuestionModel(questionId: "4", questionType: QuestionModel.QuestionType.dropdown, questionText: "Pick One", questionAnswers: ["one12123","two123","three123"], inputAnswer: "one2")
+        let questionModel3 = QuestionModel(questionId: "4", questionType: QuestionModel.QuestionType.dropdown, questionText: "Choose a color", questionAnswers: ["blue","cat","green"], inputAnswer: "one2")
         
         
         let defaults = UserDefaults.standard
         defaults.set("https://enzs9uvxhj7j1n2.m.pipedream.net", forKey: "webhook")
         defaults.set("Question time buddy", forKey: "title")
         defaults.set([questionModel1.asDictionary(), questionModel2.asDictionary(), questionModel3.asDictionary()], forKey: "questions")
-        defaults.set(["variable1":"someusername","variable2":"someudid","variable3":"something else"], forKey: "variables")
+        defaults.set(["somevariable":"someusername","variable2":"someudid","variable3":"something else"], forKey: "variables")
     }
 
     func loadTestDefaults() -> AppConfigModel? {

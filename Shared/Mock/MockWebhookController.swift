@@ -12,11 +12,13 @@ class MockWebhookController: WebhookControllerProto {
     private var nextPostSurveyResponses: [Result<Data, Error>] = Array()
     
     private let defaultResponse: Result<Data, Error> = .success("alls good here".data(using: .utf8)!)
+    private let defaultFail: Result<Data, Error> = .failure(DataTaskError.requestFailure(description: "Unknown Error", statusCode: -1))
     
     func postSurvey(surveySubmitModel: SurveySubmitModel, baseURL: URLComponents, session: URLSession, completion: @escaping (Result<Data, Error>) -> Void) {
         if (!nextPostSurveyResponses.isEmpty) {
             return completion(nextPostSurveyResponses.removeFirst())
         }
+        
         return completion(defaultResponse)
     }
     

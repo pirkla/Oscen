@@ -8,9 +8,11 @@
 import Foundation
 
 class MockAppConfigController: AppConfigControllerProto {
-    private let questionModel1 = QuestionModel(questionId: "1", questionType: QuestionModel.QuestionType.textInput, questionText: "How are you?", questionAnswers: Array(),inputAnswer: "")
-    private let questionModel2 = QuestionModel(questionId: "2", questionType: QuestionModel.QuestionType.dropdown, questionText: "Pick One", questionAnswers: ["one","two","three"], inputAnswer: "")
-    private let questionModel3 = QuestionModel(questionId: "4", questionType: QuestionModel.QuestionType.dropdown, questionText: "Pick One", questionAnswers: ["one12123","two123","three123"], inputAnswer: "")
+    private let questionModel2 = QuestionModel(questionId: "howareyou", questionType: QuestionModel.QuestionType.textInput, questionText: "Did you see it though?", questionAnswers: Array(),inputAnswer: "")
+    private let questionModel1 = QuestionModel(questionId: "one", questionType: QuestionModel.QuestionType.dropdown, questionText: "Look at that survey!", questionAnswers: ["I see it!","No","Yeah survey!"], inputAnswer: "")
+    private let questionModel3 = QuestionModel(questionId: "color", questionType: QuestionModel.QuestionType.dropdown, questionText: "Pick a color", questionAnswers: ["blue","cat","green"], inputAnswer: "")
+    private let questionModel4 = QuestionModel(questionId: "thoughts", questionType: QuestionModel.QuestionType.textInput, questionText: "Any additional thoughts?", questionAnswers: Array(),inputAnswer: "")
+    private let questionModel5 = QuestionModel(questionId: "survey", questionType: QuestionModel.QuestionType.dropdown, questionText: "How would you rate this survey?", questionAnswers: ["10/10","100%","10"], inputAnswer: "")
     
     private var nextReadAppConfigReturns: [AppConfigModel?] = Array()
     
@@ -18,10 +20,9 @@ class MockAppConfigController: AppConfigControllerProto {
         if (!nextReadAppConfigReturns.isEmpty) {
             return nextReadAppConfigReturns.removeFirst()
         }
-        let questionArray = [questionModel1.asDictionary(), questionModel2.asDictionary(), questionModel3.asDictionary()]
+        let questionArray = [questionModel1.asDictionary(), questionModel2.asDictionary()]
         let variables = ["username":"someuser","udid":"111111222222333334444","somevariable":"yeah we got this"]
-        return nil
-        return AppConfigModel(webhookUrl: "https://example.com", title: "Some questions for you friend", variableDict: variables, questionArray: questionArray)
+        return AppConfigModel(webhookUrl: "https://badurl.asdf", title: "Survey!", variableDict: variables, questionArray: questionArray)
     }
     
     func addHook(_ configChangedHook: @escaping () -> Void) {
