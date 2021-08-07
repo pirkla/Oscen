@@ -106,3 +106,5 @@ A sample managed app configuration:
 To start development clone the repo and in Targets > Oscen > Team > Choose a team. No developer program enrollment is required for this, it only allows the app to build locally.
 
 All code is compatible with catalyst, but the menu items don't work and I didn't bother to figure out why. If that was fixed this could be built for macOS.
+
+Note mocks are used when running debug builds, so questions will automatically fill and behavior is not identical to production.
