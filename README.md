@@ -36,7 +36,7 @@ Format: Array of Dictionaries
   Key: questionType
   Format: Enum, enter either textInput or dropdown
   Key: questionAnswers
-  Format: Array of strings - not the array can be empty if using textInput
+  Format: Array of strings - note the array can be empty if using textInput
 ```
 I know it's complicated, a page to generate these will be coming shortly.
 
