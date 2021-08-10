@@ -28,6 +28,16 @@ struct QuestionView: View {
     var body: some View {
         if (question.questionType == QuestionModel.QuestionType.dropdown) {
             HStack{
+                #if targetEnvironment(macCatalyst)
+                Picker(question.questionText, selection: $question.inputAnswer) {
+                    ForEach(question.questionAnswers, id: \.self) {
+                        Text($0)
+                            .multilineTextAlignment(.leading)
+                    }
+                }
+                .pickerStyle(MenuPickerStyle())
+                .frame(maxWidth: .infinity)
+                #else
                 Picker(selection: $question.inputAnswer, label: CustomPickerLabel(title: question.questionText, boundAnswer: $question.inputAnswer) ) {
                     ForEach(question.questionAnswers, id: \.self) {
                         Text($0)
@@ -36,6 +46,7 @@ struct QuestionView: View {
                 }
                 .pickerStyle(MenuPickerStyle())
                 .frame(maxWidth: .infinity)
+                #endif
             }
             .padding(.leading, 12)
         }

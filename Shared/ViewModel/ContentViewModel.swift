@@ -59,7 +59,7 @@ class ContentViewModel: ObservableObject{
             case .success(_):
                 self.setAlert(ErrorDetails(title: "Success!", message: "Your answers have been submitted.", buttonMessage: "Do it again", buttonAction: nil))
             case .failure(let error):
-                self.setAlert(ErrorDetails(title: "Error", message: error.localizedDescription + ". Contact your admin for help.", buttonMessage: "Retry", buttonAction: nil))
+                self.setAlert(ErrorDetails(title: "Error", message: error.localizedDescription + " Contact your admin for help.", buttonMessage: "Retry", buttonAction: nil))
             }
         }
     }
