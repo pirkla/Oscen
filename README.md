@@ -1,7 +1,7 @@
 # Oscen
 Oscen is an iOS app that allows admins to deploy simple surveys via managed app configurations. 
 
-App Store: coming soon
+App Store: coming one day maybe
 
 # Requirements
 This app must be deployed via an MDM since it requires a managed app configuration.
